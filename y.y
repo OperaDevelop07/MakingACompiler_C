@@ -62,16 +62,13 @@
 %token <strVal> STRUCT
 
 %token PROGRAM STARTMAIN ENDMAIN /*here is the added feature for my grammar */
-%token VARS EOL
 %token WHILE ENDWHILE FOR TO STEP ENDFOR
 %token FUNCTION RETURN END_FUNCTION
 %token IF THEN ELSEIF ELSE ENDIF SWITCH CASE DEFAULT ENDSWITCH
 %token PRINT BREAK
-%token  COMMA   SINGLE_QUOTES   SEMI_COLON   EQUALS 
+%token VARS COMMA   SINGLE_QUOTES   SEMI_COLON   EQUALS 
 %token  BRACKET_OPEN  BRACKET_CLOSE   CURLY_BRACE_OPEN  CURLY_BRACE_CLOSE BIG_BRACKET_OPEN  BIG_BRACKET_CLOSE DOUBLE_QUOTES COLON FOR_ASSIGN COMNT_OP
 %token ANDOP OROP GRTOP LESSOP EQCHK NONEQCHK ADDOP SUBOP MULOP DIVOP POWOP
-
-
 
 
 
@@ -84,32 +81,34 @@
 
 
 %%
-   
+ 
+  
 
-PROGRAMM_DEF :  PROGRAM IDENTIFIER NEWLINE
+PROGRAMM_DEF :  PROGRAM IDENTIFIER '\n'
                 FUNCTION_DECLARATION 
                 STARTMAIN 
                 VAR_DECL 
-                COMMAND_BODY
-                ENDMAIN EOL
-
-NEWLINE:  '\n'
-       | NEWLINE NEWLINE 
-
+                COMMAND_BODY NEWLINE
+                ENDMAIN 
+               
+NEWLINE :
+        | '\n'
+  
 DATA_TYPE : CHAR
-          | INTEGER        
-        
+          | INTEGER
 
-FUNCTION_DECLARATION : 
-                     | FUNCTION IDENTIFIER BRACKET_OPEN FUNC_PARAMS BRACKET_CLOSE 
+
+FUNCTION_DECLARATION : FUNCTION IDENTIFIER BRACKET_OPEN FUNC_PARAMS BRACKET_CLOSE '\n'
                        FUNC_BODY 
-                       END_FUNCTION 
-
+                       END_FUNCTION NEWLINE
+                     | FUNCTION_DECLARATION  FUNCTION_DECLARATION  
+                     | 
+                     ;
 
 
 FUNC_BODY : VAR_DECL 
-            COMMAND_BODY
-            RETURN RTN_VAL 
+            COMMAND_BODY NEWLINE
+            RETURN RTN_VAL NEWLINE 
             
          
 
@@ -125,9 +124,12 @@ FUNC_PARAMS : INTEGER_VALUE
             | VAR_ID /*paradoxi oti oi parametroi gia mia synartisi einai eite integer,strings kai onomata metabliton,gia tis metablites den xreiazetai na exoun dilothei */
             | FUNC_PARAMS COMMA FUNC_PARAMS
 
-VAR_DECL : NEWLINE
-         | VARS DATA_TYPE VAR_LIST SEMI_COLON
-         | VAR_DECL NEWLINE VAR_DECL
+VAR_DECL :  /*make a good recursion so that multiple variable declarations are supported and dont forget to always include the empty rule at the end but this produces many conflicts so check your overall grammar definitions*/
+         | VARS DATA_TYPE VAR_LIST SEMI_COLON 
+         ; 
+
+        
+          
 
 VAR_LIST : VAR_ID 
          | VAR_LIST COMMA VAR_LIST
@@ -137,7 +139,6 @@ VAR_ID : CHARACTER_VALUE
        | ARRAY_IDENTIFIER
 
 COMMAND_BODY : 
-             | NEWLINE
              | COMMAND /*i make this command body so that we can skip commands if we want so */ 
 
 COMMAND : ASSIGN_CMD
@@ -148,8 +149,8 @@ COMMAND : ASSIGN_CMD
         | COMMENT_CMD /*we just ignore anything after % until the end of line,later we will do multiline comments with states */        
 
 ASSIGN_CMD :  VAR_ID EQUALS EXPRESSION SEMI_COLON
-           | ASSIGN_CMD NEWLINE ASSIGN_CMD
-           | ASSIGN_CMD ASSIGN_CMD  
+           | ASSIGN_CMD  ASSIGN_CMD
+ 
 
 LOOP_CMD : WHILE_CMD
          | FOR_CMD
@@ -182,12 +183,11 @@ IF_CMD : IF BRACKET_OPEN LOGIC_COND BRACKET_CLOSE THEN
          ELSE_BOD 
          ENDIF
 
-ELIF_BOD : NEWLINE         /*0 one or more else ifs*/
+ELIF_BOD :         /*0 one or more else ifs*/
          | ELSEIF
-           COMMAND_BODY
-         | ELIF_BOD ELIF_BOD /*so we can have recursion and repeat else ifs */  
+           COMMAND_BODY /*so we can have recursion and repeat else ifs */  
 
-ELSE_BOD : NEWLINE        /*0 or 1 else since its not must have in an if command like else ifs above*/
+ELSE_BOD :         /*0 or 1 else since its not must have in an if command like else ifs above*/
          | ELSE
            COMMAND_BODY
 
@@ -201,7 +201,7 @@ CASE_BOD :  CASE BRACKET_OPEN EXPRESSION BRACKET_CLOSE COLON
             COMMAND_BODY
           | CASE_BOD CASE_BOD
 
-DEFAULT_BOD : NEWLINE            /*0 or 1 default permitted*/
+DEFAULT_BOD :             /*0 or 1 default permitted*/
             |  DEFAULT COLON
                COMMAND_BODY         
 
@@ -229,7 +229,8 @@ BASIC_OPER : ADDOP
            | POWOP
 
 
-
+       
+ 
 
 
 

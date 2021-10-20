@@ -6,9 +6,9 @@
     void InvalidToken();
 
 %}
+%option noyywrap
+%option yylineno
 
-whitespace      [ \t\r\v\f]
-newline         \n
 
 %%
 "int"   | "char"   {yylval.dataType = strdup(yytext);return DATA_TYPE;}
@@ -76,18 +76,18 @@ newline         \n
 \"(\\.|[^"])*\"                                 {yylval.strVal = strdup(yytext); return STRING_VALUE;}
 
 "%".*"\n"                                       {yylval.strVal = strdup(yytext); return ONELINE_COMNT;}
-{newline}                                       {yylineno++;} 
-[\n]+                                           {return EOL;}
-{whitespace}                                    ;
+
+
+[ \t\r\n]                                         ;
+[\r\n]+                                          {return '\n';}
+
+<<EOF>>                                         { yyterminate(); return 0; }
 .                                               {InvalidToken(); return *yytext;}
 
 
 
 %%
 
-int yywrap(void){
-    return 1;
-}
 
 void yyerror(char *s) {
     fprintf(stderr, "\nERROR ON LINE %d : \n %s\n", yylineno, s);
