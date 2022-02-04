@@ -1,0 +1,205 @@
+PROGRAM myprO23gram 
+/*mplampla*/
+
+TYPEDEF STRUCT imag_type 
+% kane edo paradoxi oti exoume os mono typo struct to imag_type
+
+
+VARS INTEGER d,imag2,imag3[90]; 
+
+
+VARS CHAR var,op[89],sop,ghk21s;
+
+imag_type ENDSTRUCT
+
+FUNCTION func2(100,97,xyz,myone)
+
+VARS INTEGER var2,var3,var1,var4,x1,z1,var6,counter,yz1,kyl1;
+
+var2 = var3 + 5 * 2^(3-(7/(var1+var3)));
+
+s=9;
+
+
+WHILE (x*2 > var4)
+
+x1=z1-(9/var6);
+
+ENDWHILE
+
+FOR counter:=3 TO 300 STEP 1
+
+yz1 = kyl1*7^(x+y*7);
+
+ENDFOR
+
+
+
+
+RETURN z 
+
+END_FUNCTION
+
+
+FUNCTION func53(100,97,xyz,myone)
+ /*
+currently we dont support tables as parameters in function definition,this can change though
+*/
+
+var2 = var3 + 5 * 2^(3-(7/(var1+var3)));
+
+s=9;
+
+
+WHILE (x*2 > var4)
+
+x1=z1-(9/var6);
+
+ENDWHILE
+
+FOR counter:=3 TO 300 STEP 1
+
+yz1 = kyl1*7^(x+y*7);
+
+ENDFOR
+
+
+
+
+RETURN z 
+
+END_FUNCTION
+
+
+FUNCTION func34(100,97,xyz,myone)
+
+var2 = var3 + 5 * 2^(3-(7/(var1+var3)));
+
+s=9;
+
+
+WHILE (x*2 > var4)
+
+x1=z1-(9/var6);
+
+ENDWHILE
+
+FOR counter:=3 TO 300 STEP 1
+
+yz1 = kyl1*7^(x+y*7);
+
+ENDFOR
+
+
+
+
+RETURN z 
+
+END_FUNCTION
+
+FUNCTION funcDummy(zero,bet9,table)
+
+VARS INTEGER varDummy;
+
+varDummy = 10;
+
+RETURN varDummy
+
+END_FUNCTION
+
+STARTMAIN 
+
+VARS CHAR var11,var3[10],var44,textsample,xyz,vartest;
+VARS STRUCT imag_type var90[28],mystruct2;
+VARS INTEGER var101,var22,var202,var32[10],var407,def,iop;
+
+var407 = funcDummy(0,year,bed);
+
+var22 = var1 + 9; 
+
+FOR counter:=3 TO 300 STEP 1
+
+yz1 = kyl1*7^(x+y*7);
+
+BREAK;
+
+ENDFOR 
+
+SWITCH(x*90)
+
+%lallaslalslsasss1212212*(&@(*&!(!&*&#*#&(*#&(*@&(@%%%%sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
+
+
+
+/*
+
+here is my multiline comment121221)(@)@*@(*SKJSSJ)
+bla bla/**//*jaksjsasaj%%%
+
+
+*/ 
+
+
+
+CASE(28): 
+
+
+
+y=2;
+
+
+CASE(45):
+
+
+
+x=9;
+
+
+DEFAULT:
+
+def=89*func34(2,4);
+
+
+ENDSWITCH
+
+
+PRINT(“textsample”[,xyz]);
+
+IF  (x<9)  THEN 
+
+y=99; 
+
+ELSEIF
+
+y=98*iop-x;
+
+ELSEIF
+
+
+z=n-x/k;
+
+ELSEIF
+
+
+PRINT(“sample    sasassa   assaassasa ”[,vartest]);
+
+ELSEIF
+
+FOR counter:=2 TO 100 STEP 2
+
+yz1 = kyl1*7^(x+y*7);
+
+
+
+
+ENDFOR 
+
+ELSE
+
+var2 = var3 + 5 * 2^(3-7/(var1+var3));
+
+ENDIF 
+
+
+ENDMAIN

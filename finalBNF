@@ -1,0 +1,128 @@
+<programm_def> ::= "PROGRAM" <identifier> "\n" <struct_fn> <function_dec> "STARTMAIN" <newline> <var_decl> <command_body> "ENDMAIN"
+
+<struct_fn> ::= <struct_defn> | <struct_defn><struct>
+
+<struct_defn> ::= "STRUCT" "imag_type" "\n" <var_decl> "ENDSTRUCT" <newline> | "TYPEDEF" "STRUCT" "imag_type" "\n" <var_decl> "imag_type" "ENDSTRUCT" <newline>
+
+<newline_bod> ::=  "" | "\n"
+
+<newline> ::= <newline_bod> | <newline_bod><newline> 
+
+<identifier> ::= <char> | <char><digit> | <identifier><identifier>
+
+<function_dec> ::= <function_declaration> | ""
+
+<function_declaration> ::= <function_strc> | <function_strc><function_declaration>
+
+<function_strc> ::= "FUNCTION" <identifier> "(" <func_params> ")" "\n" <func_body> "END_FUNCTION" <newline>
+
+<func_params> ::= <integer> | <string> | <identifier> | <func_params> "," <func_params>
+
+<func_body> ::= <var_decl> <command_body> "RETURN" <rtn_val> <newline> | <command_body> "RETURN" <rtn_val> <newline> |  <var_decl> "RETURN" <rtn_val> <newline> | "RETURN" <rtn_val> <newline>
+
+<var_decl> ::= <var_body> | <var_body><var_decl>
+
+<var_body> ::= "VARS" <data_type> <var_list> ";" <newline>
+
+<data_type> ::= "CHAR" | "INTEGER" | "STRUCT" "imag_type"
+
+<var_list> ::= <decl_id> | <var_list> "," <var_list>
+
+<decl_id> ::=  <identifier> | <array_identf>
+
+<array_identf> ::= <identifier> "[" <integer> "]"
+
+<var_id> ::= <identifier> | <array_identf>
+
+<rtn_val> ::= <literal> | <var_id>
+
+<literal> ::= <integer> | <string>
+
+<command_body> ::= <command> | <command><command_body>
+
+<command> ::= <assign_cmd><newline> | <loop_cmd><newline> | <contrl_cmd><newline> | <print_cmd><newline> | <break_cmd><newline>
+
+<assign_cmd> ::= <var_id> "=" <expression> ";"
+
+<loop_cmd> ::= <while_cmd> | <for_cmd>
+
+<while_cmd> ::= "WHILE" "(" <logic_cond> ")" <newline> <command_body> "ENDWHILE"
+
+<logic_cond> ::= <expression> <logic_op> <expression>
+
+<logic_op> ::= "AND" | "OR" | ">" | "<" | "==" | "!="
+
+<for_cmd> ::= "FOR" <var_id> <for_assign> <integer> "TO" <integer> "STEP" <integer> <newline> <command_body> "ENDFOR"
+
+<contrl_cmd> ::= <if_cmd> | <switch_cmd>
+
+<if_cmd> ::= "IF" "(" <logic_cond> ")" "THEN" <newline> <command_body> <elif_str> <else_bod> "ENDIF"
+
+<elif_str> ::= <elif> | ""
+
+<elif> ::= <elif_bod> | <elif_bod><elif>
+
+<elif_bod> ::= "ELSEIF" <newline> <command_body>
+
+<else_bod> ::= "ELSE" <newline> <command_body> | ""
+
+<switch_cmd> ::= "SWITCH" "(" <expression> ")" <newline> <case_bod> <default_bod> "ENDSWITCH"
+
+<case_bod> ::= <case_str> | <case_str> <case_bod>
+
+<case_str> ::= "CASE" "(" <expression> ")" ":" <newline> <command_body>
+
+<default_bod> ::= "DEFAULT" ":" <newline> <command_body> | "DEFAULT" ":" <newline>
+
+<print_cmd> ::= "PRINT" "(" "“" <text> "”" "[" "," <var_id> "]" ")" ";" | "PRINT" "(" "“" <text> "”" ")" ";"
+
+<text> ::= <text_mul> | ""
+
+<text_mul> ::= <text_singl> | <text_singl><text_mul>
+
+<text_singl> ::= <literal> | <identifier> | <array_identf>
+
+<break_cmd> ::= "BREAK" ";"
+
+<expression> ::= <expr_part> | <expr_part> <basic_oper> <expression> | "(" <expression> ")"
+
+<expr_part> ::= <integer> | <var_id> | <func_call>
+
+<func_call> ::= <identifier> "(" <func_parmscall> ")"
+
+<func_parmscall> ::= <literal> | <identifier> | <array_identf> | <func_params> "," "func_params"
+
+<basic_oper> ::= "+" | "-" | "*" | "/" | "^"
+
+<char> ::= 'A' | 'a' | 'B' | 'b' | 'C' | 'c' | 'D' | 'd' | 'E' | 'e' | 'F' | 'f' | 'G' | 'g' | 'H' | 'h' | 'I' | 'i' | 'J' | 'j' | 'K' | 'k' | 'L' | 'l' | 'M' | 'm' | 'N' | 'n' | 'O' | 'o' | 'P' | 'p' | 'Q' | 'q' | 'R' | 'r' | 'S' | 's' | 'T' | 't' | 'U' | 'u' | 'V' | 'v' | 'W' | 'w' | 'X' | 'x' | 'Y' | 'y' | 'Z' | 'z' | '_'
+ 
+<digit> ::=  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
+
+<integer> ::= <signed_integer> | <unsigned_integer>
+
+<unsigned_integer> ::= digit | <unsigned_integer><digit>
+
+<signed_integer> ::= <sign> digit | <signed_integer><digit>
+
+<sign> ::= - | +
+
+<string_bod> ::= <char> | <digit> | <string><char> | <string><digit>
+ 
+<string> ::= <string_bod> | <string_bod><string> 
+
+<symbol> ::= "|" | " " | "!" | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | ">" | "=" | "<" | "?" | "@" | "[" | "\" | "]" | "^" | "`" | "{" | "}" | "~"
+
+<any_bod> ::= <char> | <digit> | <symbol> |  <string><char> | <string><digit>
+
+<any> ::= <any_bod> | <any_bod><any> | ""
+
+<comment> ::= <line_comment> | <multi_comment> | <comment><line_comment> | <comment><multi_comment>
+
+<line_comment> ::= % <any> <EOL> <newline>
+
+<multi_comment> ::= "/""*" <newline> <any>   "*""/" <newline>
+
+
+
+
+
