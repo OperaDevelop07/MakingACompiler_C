@@ -1,3 +1,3 @@
 # Making a Custom C compiler
 
-v.02 ->NEWLINE RULE ,problems with recognising newline and many conflicts thus far
+Custom C compiler that can recognise a C like language,for more information about the recognised symbols and syntax see the .l and .y files.
